@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-
+  trailingSlash: true,
   basePath: "/nur.mk",
 };
 
