@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 transition-colors duration-300;
+  }
+
+  .dark body {
+    @apply bg-slate-950 text-slate-50;
+    background-image: none !important;
+  }
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    @apply transition-colors duration-500 ease-in-out;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+body {
+  transition:
+    background-color 0.7s ease-in-out,
+    color 0.5s ease-in-out;
+}
+
+.font-arabic {
+  line-height: 1.8;
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+}
