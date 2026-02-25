@@ -12,6 +12,14 @@ const ITEMS_PER_PAGE = 20;
 
 export default function SurahClient({ id }: { id: string }) {
   const surahId = Number.parseInt(id, 10);
+  console.log("DATA LENGTH:", (surasData as any[]).length);
+  console.log("FIRST:", (surasData as any[])[0]);
+  console.log(
+    "FILTER COUNT for",
+    surahId,
+    "=",
+    (surasData as any[]).filter((x) => x.sura === surahId).length,
+  );
 
   const [currentPage, setCurrentPage] = useState(1);
   const [lastRead, setLastRead] = useState<string | null>(null);
@@ -47,7 +55,7 @@ export default function SurahClient({ id }: { id: string }) {
   }, [loading, currentPage]);
 
   const allAyahs = useMemo(() => {
-    return (surasData as any[]).filter((item) => item.sura === surahId);
+    return (surasData as any[]).filter((item) => Number(item.sura) === surahId);
   }, [surahId]);
 
   useEffect(() => {
