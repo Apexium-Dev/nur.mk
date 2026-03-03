@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
   title: "nur.mk ",
@@ -17,9 +18,12 @@ export const metadata: Metadata = {
     "Quran Macedonian",
   ],
   authors: [{ name: "nur.mk" }],
+  icons: {
+    icon: "/logo.png",
+  },
   openGraph: {
     title: "nur.mk - Светлина на вашиот пат",
-    description: "Прочитајте го Благородниот Куран на македонски јазик.",
+    description: "Прочитајте го Куранот на македонски јазик.",
     url: "https://nur.mk",
     siteName: "nur.mk",
     images: [
@@ -54,6 +58,8 @@ export default function RootLayout({
 
           <Footer />
         </ThemeProvider>
+
+        <GoogleAnalytics gaId="G-RDLS1GQT8T" />
       </body>
     </html>
   );
