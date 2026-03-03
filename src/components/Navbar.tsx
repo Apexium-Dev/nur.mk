@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import SearchModal from "./SearchModal";
 import ThemeToggle from "./ThemeToggle";
 
@@ -23,8 +24,13 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-3 group shrink-0">
-              <div className="w-10 h-10 bg-green-600 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg shadow-green-200 dark:shadow-none group-hover:rotate-6 transition-transform font-serif">
-                Н
+              <div className="relative w-10 h-10 overflow-hidden rounded-xl shadow-lg shadow-green-200 dark:shadow-none group-hover:rotate-6 transition-transform">
+                <Image
+                  src="/logo.png"
+                  alt="nur.mk logo"
+                  fill
+                  className="object-cover"
+                />
               </div>
               <span className="text-xl font-black tracking-tighter text-slate-900 dark:text-white">
                 nur<span className="text-green-600">.mk</span>
