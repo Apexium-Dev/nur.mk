@@ -12,10 +12,12 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
+  // Овде ја додадовме Вактијата
   const navLinks = [
     { name: "Сури", href: "/suras" },
     { name: "Џузови", href: "/juz" },
     { name: "Тесбих", href: "/tesbih" },
+    { name: "Вактија", href: "/vaktija" },
   ];
 
   return (
