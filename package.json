@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@next/third-parties": "^16.1.6",
+    "html-to-image": "^1.11.13",
     "html2canvas": "^1.4.1",
     "leaflet": "^1.9.4",
     "next": "16.1.6",
