@@ -6,6 +6,7 @@ import * as htmlToImage from "html-to-image";
 interface ShareAyahProps {
   arabic: string;
   macedonian: string;
+  transliteration?: string;
   surahName: string;
   ayahNumber: number | string;
 }
@@ -13,6 +14,7 @@ interface ShareAyahProps {
 export default function ShareAyahImage({
   arabic,
   macedonian,
+  transliteration,
   surahName,
   ayahNumber,
 }: ShareAyahProps) {
