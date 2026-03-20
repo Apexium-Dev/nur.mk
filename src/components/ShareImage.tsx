@@ -6,7 +6,7 @@ import * as htmlToImage from "html-to-image";
 interface ShareAyahProps {
   arabic: string;
   macedonian: string;
-  transliteration?: string;
+  transliteration?: string; // Опционално за да не прави грешка ако го нема
   surahName: string;
   ayahNumber: number | string;
 }
@@ -27,6 +27,7 @@ export default function ShareAyahImage({
     setLoading(true);
 
     try {
+      // Креирање на слика со висок квалитет
       const dataUrl = await htmlToImage.toPng(cardRef.current, {
         quality: 1.0,
         pixelRatio: 2,
@@ -43,6 +44,7 @@ export default function ShareAyahImage({
         files: [file],
       };
 
+      // Споделување или преземање
       if (navigator.share && navigator.canShare(shareData)) {
         await navigator.share(shareData);
       } else {
@@ -70,38 +72,44 @@ export default function ShareAyahImage({
       >
         <div
           ref={cardRef}
-          // Потполно црна позадина, огромни маргини (p-32)
           className="w-[1080px] h-[1920px] bg-black p-32 flex flex-col justify-between items-center relative box-border"
           style={{
             fontFamily:
-              '-apple-system, BlinkMacSystemFont, "Inter", sans-serif',
+              '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif',
           }}
         >
-          {/* ТОП: Многу суптилно лого */}
-          <div className="text-zinc-600 text-[1.75rem] font-semibold tracking-[0.5em] uppercase mt-10">
+          {/* ТОП ЛОГО */}
+          <div className="text-zinc-600 text-[1.75rem] font-black tracking-[0.6em] uppercase mt-10">
             NUR.MK
           </div>
 
-          {/* СРЕДИНА: Текстот (чист фокус) */}
-          <div className="flex flex-col items-center justify-center flex-1 w-full gap-20">
-            {/* Арапски текст - чиста бела боја */}
+          {/* ЦЕНТРАЛЕН ТЕКСТ */}
+          <div className="flex flex-col items-center justify-center flex-1 w-full gap-16">
+            {/* Арапски */}
             <p
               dir="rtl"
-              className="text-[6.5rem] leading-[1.3] text-center text-white w-full"
+              className="text-[6.5rem] leading-[1.4] text-center text-white w-full"
               style={{ fontFamily: "'Noto Naskh Arabic', serif" }}
             >
               {arabic}
             </p>
 
-            {/* Македонски превод - Apple "Zinc" сива боја */}
-            <p className="text-[3.5rem] font-medium text-zinc-400 leading-[1.4] text-center max-w-[900px] tracking-tight">
+            {/* Транслитерација (суптилно под арапскиот) */}
+            {transliteration && (
+              <p className="text-[2.2rem] font-light italic text-zinc-500 text-center max-w-[850px] leading-relaxed">
+                {transliteration}
+              </p>
+            )}
+
+            {/* Македонски превод */}
+            <p className="text-[3.5rem] font-medium text-zinc-300 leading-[1.4] text-center max-w-[920px] tracking-tight">
               {macedonian}
             </p>
           </div>
 
-          {/* ДНО: iOS стил "Pill" виџет за информациите */}
-          <div className="mb-10 bg-zinc-900/80 border border-zinc-800 rounded-full px-12 py-6 flex items-center gap-6 shadow-2xl backdrop-blur-md">
-            <span className="text-4xl font-medium text-white tracking-wide">
+          {/* ИНФО ПИЛ (iOS Виџет стил) */}
+          <div className="mb-10 bg-zinc-900/90 border border-zinc-800 rounded-full px-14 py-7 flex items-center gap-6 shadow-2xl">
+            <span className="text-4xl font-bold text-white tracking-wide">
               {surahName}
             </span>
             <div className="w-2.5 h-2.5 rounded-full bg-zinc-600"></div>
@@ -112,16 +120,15 @@ export default function ShareAyahImage({
         </div>
       </div>
 
-      {/* 2. ВИДЛИВОТО КОПЧЕ (Минималистичко копче за споделување) */}
+      {/* 2. ВИДЛИВОТО КОПЧЕ НА САЈТОТ */}
       <button
         onClick={generateAndShare}
         disabled={loading}
-        title="Сподели како Story"
         className="group relative p-2 rounded-xl text-slate-400 hover:text-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 dark:hover:text-white transition-all duration-300 disabled:opacity-50"
       >
         {loading ? (
           <svg
-            className="animate-spin h-[18px] w-[18px] text-slate-900 dark:text-white"
+            className="animate-spin h-[18px] w-[18px]"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -161,7 +168,7 @@ export default function ShareAyahImage({
 
         {copiedFallback && (
           <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-black text-white text-[9px] font-black uppercase tracking-widest rounded shadow-lg whitespace-nowrap z-50">
-            ЗАЧУВАНО
+            СИМНАТО
           </span>
         )}
       </button>
