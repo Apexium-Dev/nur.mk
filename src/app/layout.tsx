@@ -6,9 +6,13 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
-  title: "nur.mk ",
+  metadataBase: new URL("https://nur.mk"),
+  title: "nur.mk",
   description:
     "Проучувајте го Куранот со современ превод на македонски, аудио рецитации и лесна навигација низ сури и џузови.",
+  alternates: {
+    canonical: "/",
+  },
   keywords: [
     "Куран",
     "Македонски",
@@ -18,6 +22,17 @@ export const metadata: Metadata = {
     "Quran Macedonian",
   ],
   authors: [{ name: "nur.mk" }],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   icons: {
     icon: "/logo.png",
   },
